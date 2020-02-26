@@ -1,22 +1,12 @@
 #!/bin/bash
 
 #Add user
-echo "Change the password for the administrative user (pi)"
-passwd pi
 echo "Creating the user that runs the experiment (eve)"
 adduser eve
 adduser eve pi
 adduser eve sudo 
 adduser eve gpio
 adduser eve i2c
-
-#Change the timezone
-echo -n "Enter the timezone: "
-read timez
-mv /etc/localtime /etc/localtime.backup
-ln -sf /usr/share/zoneinfo/$timez /etc/localtime
-echo "Changed."
-echo ""
 
 #Change the hostname
 echo -n "Enter the Hostname (Network Name) of the Device: "
@@ -46,7 +36,7 @@ git clone https://github.com/vishhvaan/eve-pi.git /eve
 #Copy Service to Location
 cp /eve/webui/eve_webui.service /lib/systemd/system/eve_webui.service
 chmod 644 /lib/systemd/system/eve_webui.service
-systemctl enable eve_webui
+systemctl enable eve_webui.service
 
 
 #Set hostname in the files
